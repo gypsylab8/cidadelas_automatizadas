@@ -1,17 +1,17 @@
-// tempo de duracao da casa por volta de 50s
 
+// tempo de duracao da casa por volta de 50s
 #include "SerialMP3Player.h"
 #include <Stepper.h>
-
+#include <SoftwareSerial.h>
 
 // pinos do shield mp3
 #define TX 1
 #define RX 0
 // pinos do sensor de presenca
-#define trigPin = 15
-#define echoPin = 14
+#define trigPin 14
+#define echoPin 15
 // pino rele bomba de agua
-#define relay = 10
+#define relay 10
 
 
 // declaracoes do sensor de presenca
@@ -26,7 +26,7 @@ Stepper barco(stepsPerRevolution, 6,7,8,9);
 
 void setup() {
 
-  Serial.begin(9600);     // start serial interface
+  //Serial.begin(9600);     // start serial interface
   mp3.begin(9600);        // start mp3-communication
   delay(500);             // wait for init
   mp3.sendCommand(CMD_SEL_DEV, 0, 2);   //select sd-card
@@ -52,7 +52,8 @@ void setup() {
   pinMode(10, OUTPUT);
 
   porta.setSpeed(14);
-  barco.setSpeed(14);
+  barco.setSpeed(8);
+  digitalWrite(relay, HIGH);
 }
 
 void loop() {
@@ -77,13 +78,16 @@ void loop() {
   if (distance <= 40){
 
     mp3.play();
-    porta.step(stepsPerRevolution/4); // abre
 
-    digitalWrite(relay, HIGH);
-    barco.step(stepsPerRevolution*11.62); // move o barco por 50s
+    porta.step(stepsPerRevolution/4); // abre
     digitalWrite(relay, LOW);
+    barco.step(stepsPerRevolution*11.62);  //*11.62); // move o barco por 50s
+    digitalWrite(relay, HIGH);
     
     porta.step(-stepsPerRevolution/4); // fecha    
-  }
+    mp3.stop();
 
+  }
+  
+  delay(3000);
 }
