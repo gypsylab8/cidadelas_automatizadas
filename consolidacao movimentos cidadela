@@ -1,0 +1,145 @@
+-> instanciacoes passo
+
+#include <Stepper.h>
+
+const int stepsPerRevolution = 2038;  
+Stepper porta(stepsPerRevolution, 2,3,4,5);  
+Stepper janela_dir(stepsPerRevolution, 2,3,4,5);  
+Stepper janela_esq(stepsPerRevolution, 2,3,4,5);  
+
+//setup
+pinMode(2, OUTPUT);  
+pinMode(3, OUTPUT);
+pinMode(4, OUTPUT);
+pinMode(5, OUTPUT);
+
+porta.setSpeed(14); //rpm
+janela_dir.setSpeed(14); //rpm
+janela_esq.setSpeed(14); //rpm
+
+-> abrir e fechar porta
+
+//abre a porta em 5s
+int counter;
+for (counter = 0; counter >= 500; counter = counter + 1){
+porta.step(1);
+delay(10);     
+}    
+
+    
+//fecha a porta em 5s
+for (counter = 0; counter >= 500; counter = counter + 1){
+porta.step(-1);
+delay(10);     
+}    
+
+-> abrir e fechar janelas
+
+//abre as janelas em 5s
+int counter;
+for (counter = 0; counter >= 500; counter = counter + 1){
+janela_dir.step(1);
+janela_esq.step(-1);
+delay(10);     
+}    
+
+    
+//fecha as janelas em 5s
+for (counter = 0; counter >= 500; counter = counter + 1){
+janela_dir.step(-1);
+janela_esq.step(1);
+delay(10);     
+}    
+
+-> mp3
+
+#include "SerialMP3Player.h"
+#include <SoftwareSerial.h>
+
+// pinos do shield mp3
+#define TX 1
+#define RX 0
+
+SerialMP3Player mp3(RX,TX);
+
+//setup
+mp3.begin(9600);        // start mp3-communication
+delay(500);             // wait for init
+mp3.sendCommand(CMD_SEL_DEV, 0, 2);   //select sd-card
+delay(500); 
+
+//loop
+mp3.play();
+mp3.stop();
+
+
+-> sensor de presença
+
+// pinos do sensor de presenca
+#define trigPin 14
+#define echoPin 15
+
+// declaracoes do sensor de presenca
+long duration;
+int distance;
+
+//setup
+pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+
+// acao
+// Clears the trigPin
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+// Sets the trigPin on HIGH state for 10 micro seconds
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+// Reads the echoPin, returns the sound wave travel time in microseconds
+duration = pulseIn(echoPin, HIGH);
+// Calculating the distance
+distance = duration * 0.034 / 2;
+// Prints the distance on the Serial Monitor
+//Serial.print("Distance: ");
+//Serial.println(distance);
+
+if (distance <= 40){
+
+}
+
+-> girar passo continuamente para esquerda
+
+
+-> girar passo continuamente para a direita
+
+-> girar passo 360 p/ esquerda e voltar 360 para direita
+
+-> servo
+
+#include <Servo.h>
+
+Servo exemplo;
+exemplo.attach(PINO);
+exemplo.detach();
+
+exemplo.write(40);              
+delay(1500);                    
+exemplo.write(60);               
+delay(1500);                     
+for(pos = 60; pos >= 40; pos -= 1)  // goes from 0 degrees to 180 degrees 
+{                                  // in steps of 1 degree 
+  exemplo.write(pos);              // tell servo to go to position in variable 'pos' 
+  delay(100);                       // waits 15ms for the servo to reach the position 
+}
+
+exemplo.writeMicroseconds(1800);
+delay(3500);  
+
+
+-> rele
+
+#define relay 10
+pinMode(6, OUTPUT);  
+digitalWrite(relay, HIGH);
+
+
