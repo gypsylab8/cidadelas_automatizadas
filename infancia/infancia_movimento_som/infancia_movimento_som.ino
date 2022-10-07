@@ -1,5 +1,4 @@
 
-// tempo de duracao da casa por volta de 50s
 #include "SerialMP3Player.h"
 #include <Stepper.h>
 #include <SoftwareSerial.h>
@@ -17,14 +16,12 @@ long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2048;  
+const int stepsPerRevolution = 2038;  
 
-Stepper bicicleta(stepsPerRevolution, 2,3,4,5);  
-Stepper porta_esq(stepsPerRevolution, 6,7,8,9);  
-Stepper porta_dir(stepsPerRevolution, 16,17,18,19);  
-Servo comporta; 
-Servo nuvens; 
-int pos = 0;
+Stepper estacas(stepsPerRevolution, 2,3,4,5);  
+Stepper porta(stepsPerRevolution, 6,7,8,9);  
+Stepper lua(stepsPerRevolution, 10,11,12,13);  
+Servo balanca;
 
 void setup() {
 
@@ -38,32 +35,25 @@ void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
-  // pinos do motor da bicicleta
   pinMode(2, OUTPUT);  
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
-
-  // pinos do motor da porta direita
   pinMode(6, OUTPUT);  
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
-
-  // pinos do motor da porta esquerda A2-A5
-  pinMode(16, OUTPUT);  
-  pinMode(17, OUTPUT);
-  pinMode(18, OUTPUT);
-  pinMode(19, OUTPUT);
-
-
+  pinMode(10, OUTPUT);  
   pinMode(11, OUTPUT);
-  pinMode(10, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  pinMode(16, OUTPUT);
 
-  bicicleta.setSpeed(14);
-  //nuvens.attach(10);
-  comporta.attach(11);
-  //comporta.detach();
+  estacas.setSpeed(14);
+  porta.setSpeed(14);
+  lua.setSpeed(14);
+  balanca.attach(16);
+  //balanca.detach();
 
 }
 

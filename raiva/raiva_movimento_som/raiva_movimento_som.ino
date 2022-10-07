@@ -1,3 +1,4 @@
+//precisa programar a sincronia entre os arduinos
 
 #include "SerialMP3Player.h"
 #include <Stepper.h>

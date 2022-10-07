@@ -8,23 +8,20 @@
 // pinos do shield mp3
 #define TX 1
 #define RX 0
-// pinos do sensor de presenca
-#define trigPin 15
-#define echoPin 14
 
-// declaracoes do sensor de presenca
-long duration;
-int distance;
+// rele
+#define relay 19
+
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2048;  
+const int stepsPerRevolution = 2038;  
 
-Stepper bicicleta(stepsPerRevolution, 2,3,4,5);  
-Stepper porta_esq(stepsPerRevolution, 6,7,8,9);  
-Stepper porta_dir(stepsPerRevolution, 16,17,18,19);  
-Servo comporta; 
-Servo nuvens; 
-int pos = 0;
+Stepper chapeu_teto(stepsPerRevolution, 2,3,4,5);  
+Stepper chapeu_janela(stepsPerRevolution, 6,7,8,9);  
+Stepper chapeu_cadeira_cima(stepsPerRevolution, 10,11,12,13);
+Stepper chapeu_cadeira_baixo(stepsPerRevolution, 14,15,16,17);
+
+Servo lareira;
 
 void setup() {
 
@@ -33,37 +30,32 @@ void setup() {
   delay(500);             // wait for init
   mp3.sendCommand(CMD_SEL_DEV, 0, 2);   //select sd-card
   delay(500);             // wait for init
-
-  // pinos do sensor de presenca
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-
-  // pinos do motor da bicicleta
+  
   pinMode(2, OUTPUT);  
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
-
-  // pinos do motor da porta direita
   pinMode(6, OUTPUT);  
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
-
-  // pinos do motor da porta esquerda A2-A5
-  pinMode(16, OUTPUT);  
+  pinMode(10, OUTPUT);  
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  pinMode(14, OUTPUT);  
+  pinMode(15, OUTPUT);
+  pinMode(16, OUTPUT);
   pinMode(17, OUTPUT);
   pinMode(18, OUTPUT);
-  pinMode(19, OUTPUT);
+  pinMode(relay, OUTPUT);  
 
-
-  pinMode(11, OUTPUT);
-  pinMode(10, OUTPUT);
-
-  bicicleta.setSpeed(14);
-  //nuvens.attach(10);
-  comporta.attach(11);
-  //comporta.detach();
+  chapeu_teto.setSpeed(14);
+  chapeu_janela.setSpeed(14);
+  chapeu_cadeira_cima.setSpeed(14);
+  chapeu_cadeira_baixo.setSpeed(14);
+  lareira.attach(18);
+  //lareira.detach();
 
 }
 
@@ -85,6 +77,9 @@ void loop() {
   Serial.print("Distance: ");
   Serial.println(distance);
   */
+
+digitalWrite(relay, HIGH);
+
 
   int counter;
   for (counter = 0; counter <= 10; counter = counter + 1){
