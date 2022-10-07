@@ -19,7 +19,7 @@ long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2048;  
+const int stepsPerRevolution = 2038;  
 Stepper porta(stepsPerRevolution, 2,3,4,5);  
 Stepper barco(stepsPerRevolution, 6,7,8,9);  
 

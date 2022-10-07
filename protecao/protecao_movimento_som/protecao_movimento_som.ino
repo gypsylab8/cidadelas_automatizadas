@@ -1,5 +1,3 @@
-
-// tempo de duracao da casa por volta de 50s
 #include "SerialMP3Player.h"
 #include <Stepper.h>
 #include <SoftwareSerial.h>
@@ -10,8 +8,6 @@
 // pinos do sensor de presenca
 #define trigPin 14
 #define echoPin 15
-// pino rele bomba de agua
-#define relay 10
 
 
 // declaracoes do sensor de presenca
@@ -19,9 +15,10 @@ long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2048;  
-Stepper porta(stepsPerRevolution, 2,3,4,5);  
-Stepper barco(stepsPerRevolution, 6,7,8,9);  
+const int stepsPerRevolution = 2038;  
+Stepper janela_dir(stepsPerRevolution, 2,3,4,5);  
+Stepper janela_esq(stepsPerRevolution, 6,7,8,9);  
+Stepper arvore(stepsPerRevolution, 10,11,12,13);  
 
 
 void setup() {
@@ -36,24 +33,22 @@ void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
-  // pinos do motor da porta
   pinMode(2, OUTPUT);  
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
-
-  // pinos do motor do barco
   pinMode(6, OUTPUT);  
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
-
-  // pino do relay
   pinMode(10, OUTPUT);
-
-  porta.setSpeed(14);
-  barco.setSpeed(8);
-  digitalWrite(relay, HIGH);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  
+  janela_dir.setSpeed(14);
+  janela_esq.setSpeed(14);
+  arvore.setSpeed(14);
 }
 
 void loop() {
