@@ -73,38 +73,96 @@ void setup() {
 
 void loop() {
 
-  //mp3.play();
+  mp3.play();
   
   // ADICIONAR FUNCAO DE ABRIR PORTA AQUI  
   
-  /*
-  comporta_frente.setSpeed(4);
-  comporta_frente.step(2068);
   
-  comporta_meio.setSpeed(4);
+  comporta_frente.setSpeed(5);
+  comporta_frente.step(2038);
+  
+  comporta_meio.setSpeed(5);
   comporta_meio.step(2038);
 
-  comporta_fundo.setSpeed(4);
+  comporta_fundo.setSpeed(5);
   comporta_fundo.step(2038);  
   
-  delay(3000);
-  */
+  delay(300);  
+  
+  for (int i = 0; i <= 12; i = i + 1){
     
+  lingua.write(0);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(20); 
+  bochechas.step(20);
+  delay(10);
+  lingua.write(40);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(60); 
+  bochechas.step(20);
+  delay(10);
+  lingua.write(80);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(100); 
+  bochechas.step(20);
+  delay(10); 
+  lingua.write(120);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(140); 
+  bochechas.step(20);
+  delay(10);
+  lingua.write(160);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(180); 
+  bochechas.step(20);
+  delay(10);
+ 
+  lingua.write(180);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(160); 
+  bochechas.step(20);
+  delay(10);
+  lingua.write(140);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(120); 
+  bochechas.step(20);
+  delay(10);
+  lingua.write(100);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(80); 
+  bochechas.step(20);
+  delay(10); 
+  lingua.write(60);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(40); 
+  bochechas.step(20);
+  delay(10);
+  lingua.write(20);
+  bochechas.step(20);
+  delay(10);
+  lingua.write(0); 
+  bochechas.step(20);
+  delay(10);
+ 
+  }
   
-  bochechas.setSpeed(14);
-  bochechas.step(2038*5);  
-  //lingua.write(181);
   
-  delay(10000);
-  
-  /*
-  comporta_fundo.step(-2038);
-  comporta_meio.step(-2038);
-  comporta_frente.step(-2068);
-  
-  delay(5000);
+  for (int j = 0; j <= 2038; j = j + 1){
+  comporta_fundo.step(-1);
+  comporta_meio.step(-1);
+  comporta_frente.step(-1);
+  }
 
-  //mp3.stop();
-  //delay(3000);
-  */
+  mp3.stop();  
+  delay(3000);
+  
 }

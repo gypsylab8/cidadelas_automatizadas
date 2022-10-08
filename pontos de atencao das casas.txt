@@ -1,4 +1,5 @@
 RAIVA:
-- comporta do meio esta meio que travando e destravando com o proprio peso
+- fazr arvore de cami ir 180 e voltar 180
+
 
 
