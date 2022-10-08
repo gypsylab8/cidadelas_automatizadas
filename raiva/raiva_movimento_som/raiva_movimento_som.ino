@@ -16,9 +16,8 @@
 // PRESTAR ATENÇAO NISSO AQUI
 // PRESTAR ATENÇAO NISSO AQUI
 // PRESTAR ATENÇAO NISSO AQUI
-#define initPin A5
-#define endPin A6
-
+//#define initPin A5
+//#define endPin A6
 
 
 SerialMP3Player mp3(RX,TX);
@@ -59,8 +58,8 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
-  pinMode(initPin, INPUT); 
-  pinMode(endPin, OUTPUT);  
+  //pinMode(initPin, INPUT); 
+  //pinMode(endPin, OUTPUT);  
   
   comporta_fundo.setSpeed(14);
   comporta_meio.setSpeed(14);
@@ -74,36 +73,38 @@ void setup() {
 
 void loop() {
 
+  //mp3.play();
+  
+  // ADICIONAR FUNCAO DE ABRIR PORTA AQUI  
+  
   /*
-  if (digitalRead(initPin)== HIGH){
+  comporta_frente.setSpeed(4);
+  comporta_frente.step(2068);
   
-    
-    
-    // termina e manda o sinal pro outro arduino
-    analogWrite(endPin, 255);
-  }
+  comporta_meio.setSpeed(4);
+  comporta_meio.step(2038);
+
+  comporta_fundo.setSpeed(4);
+  comporta_fundo.step(2038);  
+  
+  delay(3000);
   */
+    
   
-  mp3.play();
+  bochechas.setSpeed(14);
+  bochechas.step(2038*5);  
+  //lingua.write(181);
   
-  int counter;
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(181);
-    delay(54);
-    comporta.detach();
-  }
+  delay(10000);
+  
+  /*
+  comporta_fundo.step(-2038);
+  comporta_meio.step(-2038);
+  comporta_frente.step(-2068);
+  
+  delay(5000);
 
-  delay(1000);
-
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(18);
-    delay(50);
-    comporta.detach();
-  }
-
-
-  mp3.stop();
-
+  //mp3.stop();
+  //delay(3000);
+  */
 }

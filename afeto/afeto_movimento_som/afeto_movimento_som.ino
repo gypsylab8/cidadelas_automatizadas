@@ -1,4 +1,6 @@
-// tempo de duracao da casa por volta de 50s
+// tempo de duracao da casa por volta de 56s
+//foco no fogao, ai na chaleira, ai na casa, e ai no fogao tremulando
+// e a luz por fim varia um pouco no ambiente
 
 #include <Servo.h>
 #include <Stepper.h>
