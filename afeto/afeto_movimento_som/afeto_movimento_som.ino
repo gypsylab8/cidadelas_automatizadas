@@ -5,12 +5,17 @@
 #include "SerialMP3Player.h"
 #include <SoftwareSerial.h>
 
+// pinos do shield mp3
+#define TX 1
+#define RX 0
+
+const int stepsPerRevolution = 2038;
+SerialMP3Player mp3(RX,TX);
+
 Stepper passos_girar_esquerda(stepsPerRevolution, 2, 3, 4, 5);
 Stepper passos_girar_direita(stepsPerRevolution, 6, 7, 8, 9);
 Stepper passos_gira_e_volta(stepsPerRevolution, 10, 11, 12, 13);
 Servo colheres_parede;
-
-const int stepsPerRevolution = 2038;
 
 
 void setup() {
@@ -44,30 +49,26 @@ void setup() {
 
 
 void loop() {
-  // MOVIMENTOS ARMARIO
-
-  //MOVIMENTO ABRIR PORTA DO ARMARIO
-  porta_armario.step(-stepsPerRevolution * 0.30);
-  delay(2000);
-
-  //MOVIMENTO FECHAR PORTA DO ARMARIO
-  porta_armario.step(stepsPerRevolution * 0.30);
-  delay(2000);
-
-
-
-
-  /* MOVIMENTO TRAVESSEIRO
+ 
   
-    travesseiro.write(40);              
-    delay(1500);                    
-    travesseiro.write(60);               
-    delay(1500);                     
-    for(pos = 60; pos >= 40; pos -= 1)  // goes from 0 degrees to 180 degrees 
-    {                                  // in steps of 1 degree 
-      travesseiro.write(pos);              // tell servo to go to position in variable 'pos' 
-      delay(100);                       // waits 15ms for the servo to reach the position 
-    }
+  /*
+  int counter = 0; 
+  //for de 10s delay(10000)
   
-    */
+ //passos_girar_esquerda.step(3000);
+ 
+ 
+  //for de 1s
+  for (counter = 0; counter == 1000; counter = counter + 1){
+    passos_girar_esquerda.step(-1);
+    passos_girar_direita.step(1);
+    delay(100);
+  }
+  */
+  delay(3000);
+  
+  //for de 15s delay(15000)
+  
+  //for de 15s delay(15000)
+  
 }
