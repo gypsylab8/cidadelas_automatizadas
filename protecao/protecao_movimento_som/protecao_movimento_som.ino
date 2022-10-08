@@ -15,7 +15,7 @@ long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2038;  
+const int stepsPerRevolution = 2048;  
 Stepper janela_dir(stepsPerRevolution, 2,3,4,5);  
 Stepper janela_esq(stepsPerRevolution, 6,7,8,9);  
 Stepper arvore(stepsPerRevolution, 10,11,12,13);  
@@ -46,13 +46,14 @@ void setup() {
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
   
-  janela_dir.setSpeed(14);
-  janela_esq.setSpeed(14);
+  janela_dir.setSpeed(2);
+  janela_esq.setSpeed(2);
   arvore.setSpeed(14);
 }
 
 void loop() {
 
+  /*
   // partes do sensor de presenca
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -72,17 +73,60 @@ void loop() {
   
   if (distance <= 40){
 
+    
+  }
+  */;
     mp3.play();
 
-    porta.step(stepsPerRevolution/4); // abre
-    digitalWrite(relay, LOW);
-    barco.step(stepsPerRevolution*11.62);  //*11.62); // move o barco por 50s
-    digitalWrite(relay, HIGH);
-    
-    porta.step(-stepsPerRevolution/4); // fecha    
+
+   // abre as janelas em 5s
+   /*
+   for(int i = 0; i <= stepsPerRevolution/4; i = i + 1){
+     janela_esq.step(1);
+     janela_dir.step(-1);
+     delay(10);
+   }
+*/
+
+
+   arvore.step(100);
+   arvore.step(-100);
+   arvore.step(100);
+   arvore.step(-100);
+   delay(300);
+   arvore.step(100);
+   arvore.step(-100);
+   delay(100);
+   arvore.step(100);
+   arvore.step(-100);
+   arvore.step(100);
+   arvore.step(-100);
+   delay(300);
+   arvore.step(100);
+   arvore.step(-100);
+   delay(400);
+   arvore.step(-100);
+   arvore.step(100);   
+   arvore.step(-100);
+   arvore.step(100);   
+   arvore.step(-100);
+   arvore.step(100);   
+   arvore.step(-100);
+   arvore.step(100);   
+
+  delay(400);
+     
+   arvore.step(stepsPerRevolution/2);
+   delay(2000);
+   arvore.step(stepsPerRevolution/2);  
+   arvore.step(-stepsPerRevolution);
+  delay(2000); 
+   arvore.step(-stepsPerRevolution/2);
+   arvore.step(stepsPerRevolution/2);
+   delay(1000);
     mp3.stop();
 
-  }
+  //}
   
   delay(3000);
 }
