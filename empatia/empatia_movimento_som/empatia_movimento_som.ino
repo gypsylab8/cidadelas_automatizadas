@@ -1,8 +1,8 @@
-
-// tempo de duracao da casa por volta de 50s
+#include <Servo.h>
 #include "SerialMP3Player.h"
 #include <Stepper.h>
 #include <SoftwareSerial.h>
+
 
 // pinos do shield mp3
 #define TX 1
@@ -10,8 +10,6 @@
 // pinos do sensor de presenca
 #define trigPin 14
 #define echoPin 15
-// pino rele bomba de agua
-#define relay 10
 
 
 // declaracoes do sensor de presenca
@@ -20,9 +18,9 @@ int distance;
 SerialMP3Player mp3(RX,TX);
 
 const int stepsPerRevolution = 2048;  
-Stepper porta(stepsPerRevolution, 2,3,4,5);  
-Stepper barco(stepsPerRevolution, 6,7,8,9);  
-
+Stepper nuvens(stepsPerRevolution, 2,3,4,5);  
+Stepper porta(stepsPerRevolution, 6,7,8,9);  
+Servo mares;
 
 void setup() {
 
@@ -36,28 +34,33 @@ void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
-  // pinos do motor da porta
+  // pinos do motor das nuvens
   pinMode(2, OUTPUT);  
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
 
-  // pinos do motor do barco
+  // pinos do motor da porta
   pinMode(6, OUTPUT);  
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
 
-  // pino do relay
+  // pino do motor dos mares
   pinMode(10, OUTPUT);
 
+  // pino  de comunicacao com o outro arduino
+  pinMode(11, OUTPUT);
+
   porta.setSpeed(14);
-  barco.setSpeed(8);
-  digitalWrite(relay, HIGH);
+  nuvens.setSpeed(14);
 }
 
 void loop() {
 
+  // ################ ATENCAO ##################
+
+   /*
   // partes do sensor de presenca
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -76,18 +79,49 @@ void loop() {
   
   
   if (distance <= 40){
-
-    mp3.play();
-
-    porta.step(stepsPerRevolution/4); // abre
-    digitalWrite(relay, LOW);
-    barco.step(stepsPerRevolution*11.62);  //*11.62); // move o barco por 50s
-    digitalWrite(relay, HIGH);
-    
-    porta.step(-stepsPerRevolution/4); // fecha    
-    mp3.stop();
-
-  }
   
-  delay(3000);
+    
+  */
+ 
+  // COMUNICA PRO OUTRO ARDUINO QUE TEM QUE OCMECAR:
+  
+  //digitalWrite(11, HIGH);
+ 
+  
+  // TOCA MUSICA
+  
+  //mp3.play();
+
+  
+  // PORTA ABRIR EM 10 SEG:
+  
+  // FALTA FAZER
+  
+  // ESPERAR 11 SEG:
+  
+  delay(11000);
+   
+
+  for (int i = 0; i <=380; i = i + 1){
+    mares.attach(10);
+    mares.write(160);
+    nuvens.step(10);
+    delay(40);
+    mares.detach();
+  }
+   
+  delay(18000);
+  
+  // PARA A MUSICA
+  
+  //mp3.stop();
+
+  // baixa o pino de comunicacao
+  //digitalWrite(11, LOW);
+
+  //}
+  
+  //delay(200);
+  
+  
 }
