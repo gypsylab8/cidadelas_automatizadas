@@ -9,17 +9,6 @@
 #define TX 1
 #define RX 0
 
-// PRESTAR ATENÇAO NISSO AQUI
-// PRESTAR ATENÇAO NISSO AQUI
-// PRESTAR ATENÇAO NISSO AQUI
-// PRESTAR ATENÇAO NISSO AQUI
-// PRESTAR ATENÇAO NISSO AQUI
-// PRESTAR ATENÇAO NISSO AQUI
-// PRESTAR ATENÇAO NISSO AQUI
-//#define initPin A5
-//#define endPin A6
-
-
 SerialMP3Player mp3(RX,TX);
 
 const int stepsPerRevolution = 2038;  

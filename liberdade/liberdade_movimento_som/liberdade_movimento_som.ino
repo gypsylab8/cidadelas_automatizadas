@@ -106,13 +106,34 @@ delay(19);
     delayMicroseconds(15000);
   }*/
 
-  bicicleta.step(2038*5);
+  nuvens.attach(17);
+  nuvens.write(182);
+  
+    
+  for (int i = 0; i <= 7; i = i + 1){
+    for (int j = 0; j <=2048; j = j + 1){
+      bicicleta.step(1);
+    }
+  }
+    nuvens.detach();
+ 
+   
+   // desce o sotao em 8 s
+   
+   // Set the spinning direction clockwise:
+  //digitalWrite(dirPin, HIGH);
 
 
-  // move nuvens
-  //nuvens.attach(17);
-  //nuvens.write(182);
-  //delay(4000);
+ //Spin the stepper motor 5 revolutions fast:
+ /* for (int i = 0; i < 200; i++) {
+    // These four lines result in 1 step:
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(15000);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(15000);
+  }*/
+
+ 
  
     
     //fecha as janelas
