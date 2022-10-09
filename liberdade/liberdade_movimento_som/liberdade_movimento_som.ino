@@ -1,5 +1,6 @@
 
-// tempo de duracao da casa por volta de 50s
+// essa casa recebe o sinal do arduino da luz
+
 #include "SerialMP3Player.h"
 #include <Stepper.h>
 #include <SoftwareSerial.h>
@@ -8,22 +9,19 @@
 // pinos do shield mp3
 #define TX 1
 #define RX 0
-// pinos do sensor de presenca
-#define trigPin 15
-#define echoPin 14
 
-// declaracoes do sensor de presenca
-long duration;
-int distance;
+#define dirPin 15
+#define stepPin 14
+
 SerialMP3Player mp3(RX,TX);
 
 const int stepsPerRevolution = 2048;  
 
 Stepper bicicleta(stepsPerRevolution, 2,3,4,5);  
-Stepper porta_esq(stepsPerRevolution, 6,7,8,9);  
-Stepper porta_dir(stepsPerRevolution, 16,17,18,19);  
-Servo comporta; 
-Servo nuvens; 
+Stepper janela_esq(stepsPerRevolution, 6,7,8,9);  
+Stepper janela_dir(stepsPerRevolution, 10,11,12,13);  
+//Servo comporta; // pinos 14, 15, 16
+Servo nuvens; // pino 17
 int pos = 0;
 
 void setup() {
@@ -33,10 +31,6 @@ void setup() {
   delay(500);             // wait for init
   mp3.sendCommand(CMD_SEL_DEV, 0, 2);   //select sd-card
   delay(500);             // wait for init
-
-  // pinos do sensor de presenca
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
   // pinos do motor da bicicleta
   pinMode(2, OUTPUT);  
@@ -51,93 +45,86 @@ void setup() {
   pinMode(9, OUTPUT);
 
   // pinos do motor da porta esquerda A2-A5
-  pinMode(16, OUTPUT);  
-  pinMode(17, OUTPUT);
-  pinMode(18, OUTPUT);
-  pinMode(19, OUTPUT);
-
-
+  pinMode(10, OUTPUT);  
   pinMode(11, OUTPUT);
-  pinMode(10, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+
+  pinMode(14, OUTPUT);  
+  pinMode(15, OUTPUT);
+  pinMode(16, OUTPUT);
+  pinMode(17, OUTPUT);
+
+  // PINO DE COMUNICACAO
+  pinMode(18, INPUT);
 
   bicicleta.setSpeed(14);
-  //nuvens.attach(10);
-  comporta.attach(11);
-  //comporta.detach();
-
+  janela_esq.setSpeed(14);
+  janela_dir.setSpeed(14);
+digitalWrite(stepPin, LOW);
+digitalWrite(dirPin, LOW);
 }
 
 void loop() {
- /*
-  // partes do sensor de presenca
-  // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2;
-  // Prints the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  */
+  
+  
+ // comunicacao com o outro arduino
+ if (digitalRead(18) == HIGH){
+ }
+ 
+ // toca mp3
+ 
+ //mp3.play();
 
-  int counter;
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(181);
-    delay(54);
-    comporta.detach();
-  }
-
-  delay(1000);
-
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(18);
-    delay(50);
-    comporta.detach();
-  }
-/*
-  if (distance <= 40){
-
-    mp3.play();
+ // abrir janelas
+ 
+ //abre as janelas em 10s
+/*int counter;
+for (int counter = 0; counter >= 512; counter = counter + 1){
+janela_dir.step(1);
+janela_esq.step(-1);
+delay(19);     
+}*/    
 
 
-    //abre as janelas
-    int counter;
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(1);
-    porta_esq.step(-1);
-    delay(10);     
-    }    
+// aguarda 12 s pra luz fazer sua magica
 
-    //espera 15s com a luz funcionando
-    delay(15000);
-    //10s com a luz apagada
-    delay(10000);
-
-    // sobe a comporta em 10s
-    for (counter = 0; counter >= 3; counter = counter + 1){
-    comporta.write(-400);
-    delay(10);     
-    }    
+//delay(12000);
+ 
+ // sobe o sotao em 8 seg:
+ 
+  // Set the spinning direction clockwise:
+  //digitalWrite(dirPin, LOW);
 
 
+ //Spin the stepper motor 5 revolutions fast:
+ /* for (int i = 0; i < 200; i++) {
+    // These four lines result in 1 step:
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(15000);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(15000);
+  }*/
+
+  bicicleta.step(2038*5);
+
+
+  // move nuvens
+  //nuvens.attach(17);
+  //nuvens.write(182);
+  //delay(4000);
+ 
     
     //fecha as janelas
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(-1);
-    porta_esq.step(1);
-    delay(10);     
-    }    
-    mp3.stop();
+    
+    //fecha as janelas em 10s
+/*for (counter = 0; counter >= 512; counter = counter + 1){
+janela_dir.step(-1);
+janela_esq.step(1);
+delay(19);     
+} */   
+    
+    // para a musica
+    //mp3.stop();
 
-  }
- */ 
-  //delay(100);
 }
