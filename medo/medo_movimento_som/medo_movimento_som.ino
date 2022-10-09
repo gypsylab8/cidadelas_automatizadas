@@ -1,8 +1,10 @@
+#include <Servo.h>
+
 
 // tempo de duracao da casa por volta de 50s
 #include "SerialMP3Player.h"
-#include <Stepper.h>
 #include <SoftwareSerial.h>
+
 
 // pinos do shield mp3
 #define TX 1
@@ -10,8 +12,6 @@
 // pinos do sensor de presenca
 #define trigPin 14
 #define echoPin 15
-// pino rele bomba de agua
-#define relay 10
 
 
 // declaracoes do sensor de presenca
@@ -19,9 +19,8 @@ long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2048;  
-Stepper porta(stepsPerRevolution, 2,3,4,5);  
-Stepper barco(stepsPerRevolution, 6,7,8,9);  
+Servo lado_direito;
+Servo lado_esquerdo;
 
 
 void setup() {
@@ -36,28 +35,15 @@ void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
 
-  // pinos do motor da porta
-  pinMode(2, OUTPUT);  
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
+  lado_direito.attach(2);
+  lado_esquerdo.attach(3);
 
-  // pinos do motor do barco
-  pinMode(6, OUTPUT);  
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
-
-  // pino do relay
-  pinMode(10, OUTPUT);
-
-  porta.setSpeed(14);
-  barco.setSpeed(8);
-  digitalWrite(relay, HIGH);
 }
 
 void loop() {
 
+  
+  /*
   // partes do sensor de presenca
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -88,6 +74,17 @@ void loop() {
     mp3.stop();
 
   }
-  
-  delay(3000);
+ */
+   lado_esquerdo.write(0);
+
+
+  lado_direito.write(0);
+  delay(1000);
+    lado_direito.write(50);
+  delay(1000);
+
+ //lado_esquerdo.write(0); 
+  //delay(3000);
+    //lado_direito.write(100);
+
 }
