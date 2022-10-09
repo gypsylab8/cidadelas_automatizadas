@@ -100,39 +100,39 @@ void loop() {
   
   // ABRIR janelas EM 10 SEG:
   
-  //abre a porta em 5s
-  //int counter;
-  //for (counter = 0; counter >= 500; counter = counter + 1){
-  //  porta.step(1);
-  //  delay(10);     
-  //}    
-    
-  // ESPERAR 11 SEG:
-  
-  delay(11000);
-   
+//abre as janelas em 10s
+/*int counter;
+for (int counter = 0; counter >= 512; counter = counter + 1){
+janela_dir.step(1);
+janela_esq.step(-1);
+delay(19);     
+}*/    
 
-  for (int i = 0; i <=380; i = i + 1){
-    mares.attach(10);
-    mares.write(160);
-    nuvens.step(10);
-    delay(40);
-    mares.detach();
-  }
-   
-  delay(18000);
+    
+  // ESPERAR 9 SEG:
   
+  delay(9000);
+
+  // durante 20 segundos gira so o fundo
+ 
+ folhas.step(stepsPerRevolution*4.76);
+ 
+ //durante 19 segundos gira a roda de folhas 
+ fundo.step(stepsPerRevolution*2.38);
+    
   // PARA A MUSICA
   
   //mp3.stop();
 
   // fecha a porta
   
-  //fecha a porta em 5s
-  //for (counter = 0; counter >= 500; counter = counter + 1){
-  //  porta.step(-1);
-  //  delay(10);     
-  //}    
+//fecha as janelas em 10s
+/*for (counter = 0; counter >= 512; counter = counter + 1){
+janela_dir.step(-1);
+janela_esq.step(1);
+fundo.step(10);
+delay(19);     
+} */   
   
   // baixa o pino de comunicacao
   //digitalWrite(11, LOW);
