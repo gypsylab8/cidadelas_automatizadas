@@ -95,12 +95,11 @@ void loop() {
   
   // PORTA ABRIR EM 10 SEG:
   
-  //abre a porta em 5s
-  //int counter;
-  //for (counter = 0; counter >= 500; counter = counter + 1){
-  //  porta.step(1);
-  //  delay(10);     
-  //}    
+//abre a porta em 10s
+/*for (int counter = 0; counter >= 512; counter = counter + 1){
+porta.step(1);
+delay(19);     
+}*/    
     
   // ESPERAR 11 SEG:
   
@@ -123,12 +122,12 @@ void loop() {
 
   // fecha a porta
   
-  //fecha a porta em 5s
-  //for (counter = 0; counter >= 500; counter = counter + 1){
-  //  porta.step(-1);
-  //  delay(10);     
-  //}    
-  
+//fecha a porta em 10s
+/*for (int counter = 0; counter >= 512; counter = counter + 1){
+porta.step(-1);
+delay(19);     
+}*/
+
   // baixa o pino de comunicacao
   //digitalWrite(11, LOW);
 

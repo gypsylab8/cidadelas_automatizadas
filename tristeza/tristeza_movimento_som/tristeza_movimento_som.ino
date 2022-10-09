@@ -62,7 +62,8 @@ void setup() {
 
 void loop() {
  
- // ################ ATENCAO ##################
+
+  // ################ ATENCAO ##################
 
    /*
   // partes do sensor de presenca
@@ -97,10 +98,15 @@ void loop() {
   //mp3.play();
 
   
-  // PORTA ABRIR EM 10 SEG:
+  // ABRIR janelas EM 10 SEG:
   
-  // FALTA FAZER
-  
+  //abre a porta em 5s
+  //int counter;
+  //for (counter = 0; counter >= 500; counter = counter + 1){
+  //  porta.step(1);
+  //  delay(10);     
+  //}    
+    
   // ESPERAR 11 SEG:
   
   delay(11000);
@@ -120,12 +126,21 @@ void loop() {
   
   //mp3.stop();
 
+  // fecha a porta
+  
+  //fecha a porta em 5s
+  //for (counter = 0; counter >= 500; counter = counter + 1){
+  //  porta.step(-1);
+  //  delay(10);     
+  //}    
+  
   // baixa o pino de comunicacao
   //digitalWrite(11, LOW);
 
   //}
   
   //delay(200);
+  
   
   
 }
