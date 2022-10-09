@@ -54,6 +54,7 @@ void setup() {
   lua.setSpeed(14);
   balanca.attach(16);
   //balanca.detach();
+  //balanca.write(0);
 
 }
 
@@ -76,58 +77,29 @@ void loop() {
   Serial.println(distance);
   */
 
-  int counter;
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(181);
-    delay(54);
-    comporta.detach();
-  }
-
-  delay(1000);
-
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(18);
-    delay(50);
-    comporta.detach();
-  }
-/*
-  if (distance <= 40){
 
     mp3.play();
-
-
-    //abre as janelas
-    int counter;
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(1);
-    porta_esq.step(-1);
-    delay(10);     
-    }    
-
-    //espera 15s com a luz funcionando
-    delay(15000);
-    //10s com a luz apagada
-    delay(10000);
-
-    // sobe a comporta em 10s
-    for (counter = 0; counter >= 3; counter = counter + 1){
-    comporta.write(-400);
-    delay(10);     
-    }    
-
-
     
-    //fecha as janelas
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(-1);
-    porta_esq.step(1);
-    delay(10);     
-    }    
+    
+    estacas.step(stepsPerRevolution/2);
+    
+    
+      for(int pos = 160; pos < 180; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    balanca.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  
+  lua.step(1000);
+  
+  lua.step(-1000);
+  
+    //balanca.write(10);
+    //delay(50);
+    //balanca.write(9);
+
     mp3.stop();
 
-  }
- */ 
-  //delay(100);
+
+  delay(3000);
 }
