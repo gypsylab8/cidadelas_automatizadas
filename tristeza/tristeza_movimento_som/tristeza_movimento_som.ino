@@ -61,7 +61,10 @@ void setup() {
 }
 
 void loop() {
- /*
+ 
+ // ################ ATENCAO ##################
+
+   /*
   // partes do sensor de presenca
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -75,62 +78,54 @@ void loop() {
   // Calculating the distance
   distance = duration * 0.034 / 2;
   // Prints the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  */
-
-  int counter;
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(181);
-    delay(54);
-    comporta.detach();
-  }
-
-  delay(1000);
-
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(18);
-    delay(50);
-    comporta.detach();
-  }
-/*
+  //Serial.print("Distance: ");
+  //Serial.println(distance);
+  
+  
   if (distance <= 40){
-
-    mp3.play();
-
-
-    //abre as janelas
-    int counter;
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(1);
-    porta_esq.step(-1);
-    delay(10);     
-    }    
-
-    //espera 15s com a luz funcionando
-    delay(15000);
-    //10s com a luz apagada
-    delay(10000);
-
-    // sobe a comporta em 10s
-    for (counter = 0; counter >= 3; counter = counter + 1){
-    comporta.write(-400);
-    delay(10);     
-    }    
-
-
+  
     
-    //fecha as janelas
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(-1);
-    porta_esq.step(1);
-    delay(10);     
-    }    
-    mp3.stop();
+  */
+ 
+  // COMUNICA PRO OUTRO ARDUINO QUE TEM QUE OCMECAR:
+  
+  //digitalWrite(11, HIGH);
+ 
+  
+  // TOCA MUSICA
+  
+  //mp3.play();
 
+  
+  // PORTA ABRIR EM 10 SEG:
+  
+  // FALTA FAZER
+  
+  // ESPERAR 11 SEG:
+  
+  delay(11000);
+   
+
+  for (int i = 0; i <=380; i = i + 1){
+    mares.attach(10);
+    mares.write(160);
+    nuvens.step(10);
+    delay(40);
+    mares.detach();
   }
- */ 
-  //delay(100);
+   
+  delay(18000);
+  
+  // PARA A MUSICA
+  
+  //mp3.stop();
+
+  // baixa o pino de comunicacao
+  //digitalWrite(11, LOW);
+
+  //}
+  
+  //delay(200);
+  
+  
 }
