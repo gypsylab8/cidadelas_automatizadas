@@ -8,6 +8,7 @@
 // pinos do shield mp3
 #define TX 1
 #define RX 0
+#define commPin 14
 
 // rele
 #define relay 19
@@ -54,8 +55,9 @@ void setup() {
   chapeu_janela.setSpeed(14);
   chapeu_cadeira_cima.setSpeed(14);
   chapeu_cadeira_baixo.setSpeed(14);
-  //lareira.attach(18);
+  lareira.attach(18);
   //lareira.detach();
+   digitalWrite(relay, LOW);
 
 }
 
@@ -63,49 +65,116 @@ void loop() {
 
 // recebe o sinal do outro arduino
 
- if (digitalRead(18) == HIGH){
+ if (digitalRead(commPin) == HIGH){
  }
 
+  
+  //abre a porta em 10s
+for (int counter = 0; counter >= 512; counter = counter + 1){
+porta.step(1);
+delay(19);     
+}    
 
  
   // toca mp3
 
     mp3.play();
 
-  
-  // movimento dos chapeus e do fogo 
-  
-  //chapeu_teto.step(2048);
-  //chapeu_janela.step(2048);
-  //chapeu_teto.step(2048);
-  //chapeu_cadeira_cima.step(2048);
-  //chapeu_cadeira_baixo.step(2048);
-  //chapeu_janela.setSpeed(14);
-  //chapeu_cadeira_cima.setSpeed(14);
-  //chapeu_cadeira_baixo.setSpeed(14);
-  
-  
-  //digitalWrite(relay, LOW);
-  lareira.attach(18);
-  lareira.write(0);
-  delay(500);
-    lareira.write(70);
-delay(800);
-  lareira.detach();
-  delay(1000);
-  
-  
 
-
+   // for para fazer 30s de movimento
+   for (int k = 0; k < 4; k = k + 1){
   
+  // 10.5 s de movimento:
+
+   for(int pos = 0; pos < 80; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {     
+    // in steps of 1 degree 
+    chapeu_cadeira_cima.step(10);
+    chapeu_teto.step(10);
+
+    chapeu_janela.step(10);
+    lareira.write(pos); 
+       // tell servo to go to position in variable 'pos' 
+    delay(15);        
+  } 
+  for(int pos = 80; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees 
+  { 
+    chapeu_cadeira_cima.step(10);
+    chapeu_teto.step(-10);
+    chapeu_janela.step(10);
+    lareira.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15); 
+    // waits 15ms for the servo to reach the position 
+  }
   
   // 
+   
+ }
+ 
+ // liga o rele e faz 15 s de movimentos
+ 
+ digitalWrite(relay, HIGH);
+ 
+  for(int pos = 0; pos < 80; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {     
+    // in steps of 1 degree 
+    chapeu_cadeira_cima.step(10);
+    chapeu_teto.step(10);
 
+    chapeu_janela.step(10);
+    lareira.write(pos); 
+       // tell servo to go to position in variable 'pos' 
+    delay(15);        
+  } 
+  for(int pos = 80; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees 
+  { 
+    chapeu_cadeira_cima.step(10);
+    chapeu_teto.step(-10);
+    chapeu_janela.step(10);
+    lareira.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15); 
+    // waits 15ms for the servo to reach the position 
+  }
+  
+  
+   for(int pos = 0; pos < 40; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {     
+    // in steps of 1 degree 
+    chapeu_cadeira_cima.step(-10);
+    chapeu_teto.step(-10);
+
+    chapeu_janela.step(-10);
+    lareira.write(pos); 
+       // tell servo to go to position in variable 'pos' 
+    delay(15);        
+  } 
+  for(int pos = 40; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees 
+  { 
+    chapeu_cadeira_cima.step(-10);
+    chapeu_teto.step(10);
+    chapeu_janela.step(-10);
+    lareira.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15); 
+    // waits 15ms for the servo to reach the position 
+  }
+  
+ // desliga o rele 
+ 
+ digitalWrite(relay, LOW);
+ 
  
  // para a musica
  
     mp3.stop();
+  
+  //fecha a porta em 10s
+for (int counter = 0; counter >= 512; counter = counter + 1){
+porta.step(-1);
+delay(19);     
+}    
+
+
 
   
-  //delay(100);
+  delay(1000);
 }
