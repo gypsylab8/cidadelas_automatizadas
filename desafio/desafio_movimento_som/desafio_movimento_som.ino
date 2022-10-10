@@ -14,7 +14,7 @@
 
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2038;  
+const int stepsPerRevolution = 2048;  
 
 Stepper chapeu_teto(stepsPerRevolution, 2,3,4,5);  
 Stepper chapeu_janela(stepsPerRevolution, 6,7,8,9);  
@@ -54,85 +54,58 @@ void setup() {
   chapeu_janela.setSpeed(14);
   chapeu_cadeira_cima.setSpeed(14);
   chapeu_cadeira_baixo.setSpeed(14);
-  lareira.attach(18);
+  //lareira.attach(18);
   //lareira.detach();
 
 }
 
 void loop() {
- /*
-  // partes do sensor de presenca
-  // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  // Calculating the distance
-  distance = duration * 0.034 / 2;
-  // Prints the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  */
 
-digitalWrite(relay, HIGH);
+// recebe o sinal do outro arduino
+
+ if (digitalRead(18) == HIGH){
+ }
 
 
-  int counter;
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(181);
-    delay(54);
-    comporta.detach();
-  }
-
-  delay(1000);
-
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(18);
-    delay(50);
-    comporta.detach();
-  }
-/*
-  if (distance <= 40){
+ 
+  // toca mp3
 
     mp3.play();
 
+  
+  // movimento dos chapeus e do fogo 
+  
+  //chapeu_teto.step(2048);
+  //chapeu_janela.step(2048);
+  //chapeu_teto.step(2048);
+  //chapeu_cadeira_cima.step(2048);
+  //chapeu_cadeira_baixo.step(2048);
+  //chapeu_janela.setSpeed(14);
+  //chapeu_cadeira_cima.setSpeed(14);
+  //chapeu_cadeira_baixo.setSpeed(14);
+  
+  
+  //digitalWrite(relay, LOW);
+  lareira.attach(18);
+  lareira.write(0);
+  delay(500);
+    lareira.write(70);
+delay(800);
+  lareira.detach();
+  delay(1000);
+  
+  
 
-    //abre as janelas
-    int counter;
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(1);
-    porta_esq.step(-1);
-    delay(10);     
-    }    
 
-    //espera 15s com a luz funcionando
-    delay(15000);
-    //10s com a luz apagada
-    delay(10000);
+  
+  
+  // 
 
-    // sobe a comporta em 10s
-    for (counter = 0; counter >= 3; counter = counter + 1){
-    comporta.write(-400);
-    delay(10);     
-    }    
-
-
-    
-    //fecha as janelas
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(-1);
-    porta_esq.step(1);
-    delay(10);     
-    }    
+ 
+ // para a musica
+ 
     mp3.stop();
 
-  }
- */ 
+  
   //delay(100);
 }
