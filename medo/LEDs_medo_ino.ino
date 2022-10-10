@@ -4,6 +4,7 @@
 long duration; // variable for the duration of sound wave travel
 int distance; // variable for the distance measurement
 int com = A7;
+int com1 = A6;
 int leds[] = {
   A0, A1, A2, A3, A4, A5, A6, 3, 5, 6, 9, 10, 11
 };
@@ -570,6 +571,7 @@ delay(tempFase);
     analogWrite(ledsB[2],0);
 delay(3000);
 digitalWrite(com, LOW);
+digitalWrite(com1, LOW);
 }
 
 void loop() {
@@ -593,6 +595,7 @@ void loop() {
   if(distance <30){
     Serial.println("play");
     digitalWrite(com, HIGH);
+    digitalWrite(com1, HIGH);
     play();
     
   }

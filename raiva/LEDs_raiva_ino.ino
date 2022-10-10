@@ -26,16 +26,16 @@ void setup() {
 }
 
 void loop() {
-
+delay(tempFase*6);
 //P_1 ### LEDs porta 1 ###
-  for(int y =0; y<80; y++){
+  for(int y =0; y<10; y++){
       analogWrite(ledsB[0],200);
       analogWrite(ledsB[1],10);
       analogWrite(ledsB[2],30);
   }    
   
 //P_1 ### LEDs porta 1 ###
-  for(int y =0; y<100; y++){
+  for(int y =0; y<200; y++){
       analogWrite(ledsB[0],255);
       analogWrite(ledsB[1],10);
       analogWrite(ledsB[2],30);
@@ -51,14 +51,14 @@ void loop() {
   
 delay(tempLED); 
 //P_2 ### LEDs porta 2 ###
-  for(int y =0; y<80; y++){
+  for(int y =0; y<120; y++){
       analogWrite(ledsC[0],250);
       analogWrite(ledsC[1],80);
       analogWrite(ledsC[2],10);
   }  
 delay(tempFase); 
 //P_2 ### LEDs porta 2 ###
-  for(int y =0; y<100; y++){
+  for(int y =0; y<200; y++){
       analogWrite(ledsC[0],255);
       analogWrite(ledsC[1],100);
       analogWrite(ledsC[2],10);
@@ -73,9 +73,9 @@ delay(tempFase);
           
   }
 
-delay(tempFase*4);
+//delay(tempFase*7);
 //P_3 ### LEDs Treme ###
-  for(int y =0; y<80; y++){
+  for(int y =0; y<220; y++){
      analogWrite(ledsC[0],random(255));
       analogWrite(ledsC[1],random(255));
       analogWrite(ledsC[2],random(50));
@@ -93,7 +93,7 @@ delay(tempFase*4);
   }
   
 //P_4 ### LEDs efeito  ###
-  for(int y =0; y<20; y++){
+  for(int y =0; y<30; y++){
       analogWrite(ledsB[0],255);
       analogWrite(ledsB[1],10);
       analogWrite(ledsB[2],30);
@@ -112,7 +112,7 @@ delay(tempFase*4);
       delay(240);      
   }  
 //P_3 ### LEDs Treme ###
-  for(int y =0; y<130; y++){
+  for(int y =0; y<140; y++){
       analogWrite(ledsC[0],random(255));
       analogWrite(ledsC[1],random(255));
       analogWrite(ledsC[2],random(50));

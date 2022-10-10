@@ -1,9 +1,11 @@
+int com = A7;
+
 int leds[] = {
-  A0, A1, A2, A3, A4, A5, A6, A7, 3, 5, 6, 9, 10, 11
+  A0, A1, A2, A3, A4, A5, A6, 3, 5, 6, 9, 10, 11
 };
 
 int ledsA[] = {
-  A0, A1, A2, A3, A4, A5, A6, A7
+  A0, A1, A2, A3, A4, A5, A6
 };
 
 int ledsB[] = {
@@ -22,10 +24,10 @@ void setup() {
   for (int x = 0; x < 11; x++) { 
     pinMode(leds[x], OUTPUT);
   }
-  
+   pinMode(com, INPUT); 
 }
 
-void loop() {
+void play() {
   delay(14000); 
 //P_1 ### LEDs porta 1 ###
   for(int y =0; y<80; y++){
@@ -137,3 +139,11 @@ delay(tempFase);
     analogWrite(ledsC[2],0);    
 delay(3000);
 }
+
+void loop() {
+  int val = analogRead(com);
+  if (val == HIGH) {
+    play();
+  }
+}
+

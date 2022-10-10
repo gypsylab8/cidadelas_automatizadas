@@ -1,9 +1,11 @@
+int com = A7;
+
 int leds[] = {
-  A0, A1, A2, A3, A4, A5, A6, A7, 3, 5, 6, 9, 10, 11
+  A0, A1, A2, A3, A4, A5, A6, 3, 5, 6, 9, 10, 11
 };
 
 int ledsF[] = {
-  A0, A1, A2, A3, A4, A5, A6, A7
+  A0, A1, A2, A3, A4, A5, A6
 };
 
 int ledsB[] = {
@@ -25,9 +27,9 @@ void setup() {
   
 }
 
-void loop() {
-//P_1 ### LED Frente ###
-  for(int x = 0; x <2; x++){
+void play() {
+//P_1 ### LED Baixo ###
+  for(int x = 0; x <4; x++){
     for(int y = 0; y < 255; y++) {
        analogWrite(ledsL[0],y);
        delay(tempLED*2);
@@ -41,8 +43,15 @@ void loop() {
        delay(tempLED*3);
     }    
   }  
+  
+    analogWrite(ledsL[0],0);
+    analogWrite(ledsL[1],0);
+    analogWrite(ledsL[2],0);
+    delay(10000);
+  
+    
 //### LED Meio Ceu  ###  
-  for(int x = 0; x <3; x++){
+  for(int x = 0; x <4; x++){
     for(int y = 0; y < 255; y++) {
        analogWrite(ledsL[1],y);
        delay(tempLED*2);
@@ -57,12 +66,19 @@ void loop() {
     }    
   }    
 analogWrite(ledsL[1],250);
-delay(5000);
+delay(tempFase);
 
 
     analogWrite(ledsL[0],0);
     analogWrite(ledsL[1],0);
     analogWrite(ledsL[2],0);
-    delay(3000);
+    delay(20000);
 
+}
+
+void loop() {
+  int val = analogRead(com);
+  if (val == HIGH) {
+    play();
+  }
 }
