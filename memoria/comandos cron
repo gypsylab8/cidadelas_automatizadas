@@ -1,0 +1,4 @@
+COMANDOS PARA ADICIONAR NO CRONTAB
+
+crontab -e
+@reboot "python3 /home/pi/memoria.py"
