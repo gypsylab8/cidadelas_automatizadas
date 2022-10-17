@@ -7,15 +7,17 @@
 #define TX 1
 #define RX 0
 // pinos do sensor de presenca
-#define trigPin A0
-#define echoPin A1
+#define trigPin 14
+#define echoPin 15
+
+#define commPin 10
 
 // declaracoes do sensor de presenca
 long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-const int stepsPerRevolution = 2038;  
+const int stepsPerRevolution = 2048;  
 
 Stepper porta(stepsPerRevolution, 2,3,4,5);  
 Servo livro_1;
@@ -54,7 +56,9 @@ void setup() {
 }
 
 void loop() {
- /*
+ 
+ /* 
+  
   // partes do sensor de presenca
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -68,62 +72,108 @@ void loop() {
   // Calculating the distance
   distance = duration * 0.034 / 2;
   // Prints the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  */
+  //Serial.print("Distance: ");
+  //Serial.println(distance);
+  
+  if (distance <= 40) {
 
-  int counter;
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(181);
-    delay(54);
-    comporta.detach();
-  }
+   // avise o outro arduino
+  digitalWrite(commPin, HIGH);
 
+ //toca mp3
+ 
+ mp3.play();
+
+   //abre a porta em 10s
+  for (int counter = 0; counter >= 512; counter = counter + 1){
+    porta.step(1);
+    delay(19);     
+  }   
+   
+   
+  // para mp3
+  mp3.stop();
+  
+  //fecha a porta em 10s
+  for (int counter = 0; counter >= 512; counter = counter + 1){
+    porta.step(-1);
+    delay(19);     
+  }    
+  
+  // avisa o outro arduino que acabou
+  digitalWrite(commPin, LOW);
+ 
   delay(1000);
+}
+*/
 
-  for (counter = 0; counter <= 10; counter = counter + 1){
-    comporta.attach(11);
-    comporta.write(18);
-    delay(50);
-    comporta.detach();
-  }
-/*
-  if (distance <= 40){
-
-    mp3.play();
-
-
-    //abre as janelas
-    int counter;
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(1);
-    porta_esq.step(-1);
-    delay(10);     
-    }    
-
-    //espera 15s com a luz funcionando
-    delay(15000);
-    //10s com a luz apagada
-    delay(10000);
-
-    // sobe a comporta em 10s
-    for (counter = 0; counter >= 3; counter = counter + 1){
-    comporta.write(-400);
-    delay(10);     
-    }    
+//movimento da arvore
+/*int pos;
+ for(pos = 0; pos < 180; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    arvore.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(30);                       // waits 15ms for the servo to reach the position 
+  } 
+  for(pos = 180; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees 
+  {                                
+    arvore.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(30);                       // waits 15ms for the servo to reach the position 
+  } 
+*/
 
 
-    
-    //fecha as janelas
-    for (counter = 0; counter >= 5000; counter = counter + 10){
-    porta_dir.step(-1);
-    porta_esq.step(1);
-    delay(10);     
-    }    
-    mp3.stop();
 
-  }
- */ 
-  //delay(100);
+// espera 3s
+delay(3000);
+
+// abre livro 1:
+livro_1.write(90);
+delay(5000);
+//fecha livro 1:
+livro_1.write(180);
+delay(2000);
+
+// abre livro 2:
+livro_2.write(90);
+delay(3000);
+livro_2.write(180);
+delay(2000);
+
+// abre livro 3:
+livro_3.write(90);
+delay(4000);
+livro_3.write(180);
+delay(2000);
+
+delay(9000);
+
+// nasce a arvore em 15s
+int pos;
+ for(pos = 0; pos < 180; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    arvore.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(80);                       // waits 15ms for the servo to reach the position 
+  } 
+ 
+ 
+ //fecha a porta em 10s
+for (int counter = 0; counter >= 512; counter = counter + 1){
+porta.step(-1);
+delay(19);     
+}    
+ 
+ // fecha a arvore
+ 
+  for(pos = 180; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees 
+  {                                
+    arvore.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(80);                       // waits 15ms for the servo to reach the position 
+  } 
+
+   // avise o outro arduino que acabou
+  digitalWrite(commPin, LOW);
+
+
+
+
 }

@@ -13,19 +13,20 @@
 #define trigPin 14
 #define echoPin 15
 
+#define commPin 16
+
 
 // declaracoes do sensor de presenca
 long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
 
-Servo lado_direito;
-Servo lado_esquerdo;
+Servo tombador;
 
 
 void setup() {
 
-  //Serial.begin(9600);     // start serial interface
+  Serial.begin(9600);     // start serial interface
   mp3.begin(9600);        // start mp3-communication
   delay(500);             // wait for init
   mp3.sendCommand(CMD_SEL_DEV, 0, 2);   //select sd-card
@@ -34,16 +35,17 @@ void setup() {
   // pinos do sensor de presenca
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  pinMode(commPin, OUTPUT); // Sets the echoPin as an Input
+  pinMode(13, OUTPUT); // Sets the echoPin as an Input
 
-  lado_direito.attach(2);
-  lado_esquerdo.attach(3);
+  digitalWrite(commPin, LOW);
+
+  tombador.attach(2);
 
 }
 
 void loop() {
 
-  
-  /*
   // partes do sensor de presenca
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -57,34 +59,52 @@ void loop() {
   // Calculating the distance
   distance = duration * 0.034 / 2;
   // Prints the distance on the Serial Monitor
-  //Serial.print("Distance: ");
-  //Serial.println(distance);
+  Serial.print("Distance: ");
+  Serial.println(distance);
   
   
   if (distance <= 40){
 
+    // avisa o outro arduino
+    digitalWrite(commPin, HIGH);
+    digitalWrite(13, HIGH);
+
+
     mp3.play();
 
-    porta.step(stepsPerRevolution/4); // abre
-    digitalWrite(relay, LOW);
-    barco.step(stepsPerRevolution*11.62);  //*11.62); // move o barco por 50s
-    digitalWrite(relay, HIGH);
+    delay(17000);
     
-    porta.step(-stepsPerRevolution/4); // fecha    
-    mp3.stop();
+    
 
+      
+  tombador.write(0);
+  delay(1000);
+    tombador.write(50);
+  delay(1000);
+
+  delay(8000);
+
+delay(11000);
+
+tombador.write(0);
+  delay(5000);
+  
+  delay(7000);
+  
+    tombador.write(50);
+  delay(1000);
+  tombador.write(0);
+  delay(1000);
+  
+  delay(5000);
+
+  mp3.stop();
+  
+  digitalWrite(commPin, LOW);
+  digitalWrite(c13, LOW);
+
+  
   }
- */
-   lado_esquerdo.write(0);
-
-
-  lado_direito.write(0);
+  
   delay(1000);
-    lado_direito.write(50);
-  delay(1000);
-
- //lado_esquerdo.write(0); 
-  //delay(3000);
-    //lado_direito.write(100);
-
 }

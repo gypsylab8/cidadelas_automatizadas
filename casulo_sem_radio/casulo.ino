@@ -1,32 +1,22 @@
 
-// tempo de duracao da casa por volta de 50s
+
 #include "SerialMP3Player.h"
-#include <Stepper.h>
 #include <SoftwareSerial.h>
 
 // pinos do shield mp3
-#define TX 1
-#define RX 0
+#define TX 10
+#define RX 11
+
 // pinos do sensor de presenca
-#define trigPin 14
-#define echoPin 15
-// pino rele bomba de agua
-#define relay 10
+#define trigPin A5
+#define echoPin A6
 
-#define dirPin 10
-#define stepPin 11
-
-#define commPin 16
-
+#define commPin D2
 
 // declaracoes do sensor de presenca
 long duration;
 int distance;
 SerialMP3Player mp3(RX,TX);
-
-const int stepsPerRevolution = 2048;  
-Stepper janela_esq(stepsPerRevolution, 2,3,4,5);  
-Stepper janela_dir(stepsPerRevolution, 6,7,8,9);  
 
 void setup() {
 
@@ -39,24 +29,11 @@ void setup() {
   // pinos do sensor de presenca
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-
-  pinMode(2, OUTPUT);  
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);  
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
-  pinMode(commPin, OUTPUT);
-
-  janela_esq.setSpeed(14);
-  janela_dir.setSpeed(14);
 }
 
 void loop() {
+ 
+
 
   // partes do sensor de presenca
   // Clears the trigPin
@@ -76,18 +53,10 @@ void loop() {
   
   
   if (distance <= 40){
-
-    mp3.play();
-
-    porta.step(stepsPerRevolution/4); // abre
-    digitalWrite(relay, LOW);
-    barco.step(stepsPerRevolution*11.62);  //*11.62); // move o barco por 50s
-    digitalWrite(relay, HIGH);
-    
-    porta.step(-stepsPerRevolution/4); // fecha    
-    mp3.stop();
-
-  }
   
-  delay(3000);
+  	mp3.play();
+}
+
+  delay(1000);
+ 
 }

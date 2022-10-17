@@ -1,5 +1,5 @@
-#define echoPin A0 // attach pin D2 Arduino to pin Echo of HC-SR04
-#define trigPin A1 //attach pin D3 Arduino to pin Trig of HC-SR04
+#define echoPin A5 // attach pin D2 Arduino to pin Echo of HC-SR04
+#define trigPin A4 //attach pin D3 Arduino to pin Trig of HC-SR04
 // defines variables
 long duration; // variable for the duration of sound wave travel
 int distance; // variable for the distance measurement
@@ -8,11 +8,11 @@ int com1 = A6;
 
 
 int leds[] = {
-  A0, A1, A2, A3, A4, A5, 3, 5, 6, 9, 10, 11
+  A0, A1, A2, A3, 3, 5, 6, 9, 10, 11
 };
 
 int ledsA[] = {
-  A0, A1, A2, A3, A4, A5
+  A0, A1, A2, A3
 };
 
 int ledsB[] = {
@@ -125,10 +125,11 @@ void loop() {
 
 //Start
   if(distance <30){
-    Serial.println("play");
+    //Serial.println("play");
     digitalWrite(com, HIGH);
     digitalWrite(com1, HIGH);
     play();
     
   }
+  delay(1000);
 }

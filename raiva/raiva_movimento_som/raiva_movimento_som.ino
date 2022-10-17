@@ -9,6 +9,8 @@
 #define TX 1
 #define RX 0
 
+#define commPin 19
+
 SerialMP3Player mp3(RX,TX);
 
 const int stepsPerRevolution = 2038;  
@@ -47,6 +49,8 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+
+  pinMode(commPin, INPUT);
   //pinMode(initPin, INPUT); 
   //pinMode(endPin, OUTPUT);  
   
@@ -61,10 +65,13 @@ void setup() {
 }
 
 void loop() {
+  
+  if (commPin == HIGH){
 
   mp3.play();
   
   // ADICIONAR FUNCAO DE ABRIR PORTA AQUI  
+  delay(5000);
   
   
   comporta_frente.setSpeed(5);
@@ -153,5 +160,5 @@ void loop() {
 
   mp3.stop();  
   delay(3000);
-  
+  }
 }

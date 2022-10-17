@@ -69,12 +69,9 @@ void loop() {
  }
 
   
-  //abre a porta em 10s
-for (int counter = 0; counter >= 512; counter = counter + 1){
-porta.step(1);
-delay(19);     
-}    
-
+  // espera a porta abrir no outro arduino
+  
+  delay(10000);
  
   // toca mp3
 
@@ -166,14 +163,6 @@ delay(19);
  // para a musica
  
     mp3.stop();
-  
-  //fecha a porta em 10s
-for (int counter = 0; counter >= 512; counter = counter + 1){
-porta.step(-1);
-delay(19);     
-}    
-
-
 
   
   delay(1000);
