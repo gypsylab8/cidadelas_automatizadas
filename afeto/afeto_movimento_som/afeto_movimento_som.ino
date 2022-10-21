@@ -11,6 +11,8 @@
 #define TX 1
 #define RX 0
 
+#define commPin A7
+
 const int stepsPerRevolution = 2038;
 SerialMP3Player mp3(RX,TX);
 
@@ -42,6 +44,7 @@ void setup() {
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
   pinMode(14, OUTPUT);
+  pinMode(commPin, INPUT);
 
   colheres_parede.attach(14);
   passos_girar_esquerda.setSpeed(14);
@@ -52,21 +55,45 @@ void setup() {
 
 void loop() {
  
-  
   /*
-  int counter = 0; 
-  //for de 10s delay(10000)
+ 
+  // estrutura de um "for" de 1s - utilizar para compor mais segundos 
+  // de acao. Da para tambem aumentar o tempo aumentando o delay ou
+  // o valor maximo do for
   
- //passos_girar_esquerda.step(3000);
- 
- 
-  //for de 1s
-  for (counter = 0; counter == 1000; counter = counter + 1){
+  for (int counter = 0; counter == 1000; counter = counter + 1){
     passos_girar_esquerda.step(-1);
     passos_girar_direita.step(1);
+    passos_gira_e_volta.step(1);
     delay(100);
   }
+
   */
+
+
+  // roteiro da casa
+
+  // espera 10s
+  delay(10000) 
+
+  // dos 10 aos 60 gira tudo maluco
+  
+  
+  for (int i = 0; i < 60; i = i + 1){
+  for (int counter = 0; counter == 1000; counter = counter + 1){
+    passos_girar_esquerda.step(-1);
+    passos_girar_direita.step(1);
+    if(i % 2 == 0){
+    passos_gira_e_volta.step(1);
+    }
+    else {
+    passos_gira_e_volta.step(-1);
+    }
+    delay(100);
+  }
+  }
+
+
   delay(3000);
   
   //for de 15s delay(15000)
