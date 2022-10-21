@@ -70,11 +70,14 @@ void loop() {
 
   */
 
+  if (digitalRead(commPin)==HIGH){
+    
+  mp3.play();
 
   // roteiro da casa
 
   // espera 10s
-  delay(10000) 
+  delay(10000); 
 
   // dos 10 aos 60 gira tudo maluco
   
@@ -93,11 +96,7 @@ void loop() {
   }
   }
 
-
-  delay(3000);
+  mp3.stop();
   
-  //for de 15s delay(15000)
-  
-  //for de 15s delay(15000)
-  
+  } 
 }
