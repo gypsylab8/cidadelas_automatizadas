@@ -8,8 +8,8 @@
 #include <SoftwareSerial.h>
 
 // pinos do shield mp3
-#define TX 1
-#define RX 0
+#define TX A3
+#define RX A4
 
 #define commPin A7
 
@@ -24,7 +24,7 @@ Servo colheres_parede;
 
 void setup() {
 
-  Serial.begin(9600);     // start serial interface
+  //Serial.begin(9600);     // start serial interface
   mp3.begin(9600);        // start mp3-communication
   delay(500);             // wait for init
   mp3.sendCommand(CMD_SEL_DEV, 0, 2);   //select sd-card
